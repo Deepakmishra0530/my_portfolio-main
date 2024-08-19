@@ -1,15 +1,14 @@
 import {useContext,createContext,useState,useEffect} from 'react'
 import { useRouter } from 'next/router'
+import { useSelector, useDispatch } from 'react-redux'
 
 const NavContext = createContext()
 
 export const NavProvider = ({children}) => {
 
-    const router = useRouter()
+    const router = useRouter();
 
-    const [section,setSection] = useState('home')
-    
-    const [page,setPage] = useState('/')
+    const {section} = useSelector(state => state.section)
  
     const [scroll,setScroll] = useState(0)
 
@@ -24,11 +23,11 @@ export const NavProvider = ({children}) => {
 
        section === 'contact' && setScroll(2500)
 
-       console.log(section , scroll)
+    //    console.log(section , scroll)
     },[section])
   
 
-    return <NavContext.Provider value={{section,setSection,setPage,scroll}}>{children}</NavContext.Provider>
+    return <NavContext.Provider value={{section,scroll}}>{children}</NavContext.Provider>
 }
 
 export const useNav = () =>{

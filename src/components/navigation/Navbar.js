@@ -2,10 +2,14 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useNav } from '@/context/NavContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { sectionActions } from '@/store/sectionSlice'
 
 const Navbar = () => {
 
-    const { setSection, section, setPage, page } = useNav()
+    const dispatch = useDispatch()
+
+    const { setPage, page } = useNav()
     const [show,setShow] = useState(false)
 
     const router = useRouter()
@@ -23,8 +27,8 @@ const Navbar = () => {
                             type="button"
                             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             onClick={()=>{
-                                setSection('contact')  
-                                router?.pathname !=='/' && router.push('/')
+                                dispatch(sectionActions.setSection('contact'))  
+                                // router?.pathname !=='/' && router.push('/')
                                   
                               }}
                         >
@@ -46,8 +50,8 @@ const Navbar = () => {
                                 <button
                                     className="block py-2 px-3 rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700  dark:border-gray-700"
                                     onClick={() => {
-                                        setSection('home')
-                                        router?.pathname !== '/' && router.push('/')
+                                        dispatch(sectionActions.setSection('home'))
+                                        // router?.pathname !== '/' && router.push('/')
                                     }}
                                 >
                                     Home
@@ -57,8 +61,8 @@ const Navbar = () => {
                                 <button
                                     className="block py-2 px-3  rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700  dark:border-gray-700"
                                     onClick={() => {
-                                        setSection('about')
-                                        router?.pathname !== '/' && router.push('/')
+                                        dispatch(sectionActions.setSection('about'))
+                                        // router?.pathname !== '/' && router.push('/')
 
                                     }}
                                 >
@@ -73,7 +77,7 @@ const Navbar = () => {
                                     className="block py-2 px-3 rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700  dark:border-gray-700"
                                     onClick={() => {
 
-                                        setSection('projects')
+                                        dispatch(sectionActions.setSection('projects')
                                         router?.pathname !== '/' && router.push('/')
                                         // window.scrollTo(0,1350)
                                     }}
